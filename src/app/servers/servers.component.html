@@ -1,0 +1,57 @@
+<label>Server Name</label>
+<!-- <input type="text" class="form-control" (input) = "onUpdateServerName($event)"> -->
+<!-- here we are passing data with Event Binding in the Form -->
+
+
+<input type = "text" class = "form-control" [(ngModel)] = "serverName">
+<!-- Two way binding, it is listening to "sever Name" -->
+<p>{{ serverName }}</p>
+
+<!--
+this is seocnd assignment 2 module
+
+<input type ="text" class = "form-control" [(ngModel)] = "userName">
+<p>{{userName}}</p>
+<button class="btn btn-primary" [disabled]="userName === ''" (click)= "onClearInput()"> Reset User </button>
+<button class="btn btn-primary" [disabled]="userName === ''" (click)= "userName=''"> Reset User </button> 
+
+-->
+
+
+<br>
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click) = "onCreateServer()">
+    Add Server: {{allowNewServer}} 
+</button>  <!-- String interapolation and Event Binding-->
+
+
+<!-- <p>{{ ServerCreationStatus }}</p> -->
+<p *ngIf="serverCreated; else noServer"> Server was created, server name is {{ serverName }}</p>
+<!-- ngIf is a structural directive, which means it affects the structure of DOM, and condition/experssion should alwasys return true or false  -->
+
+<!-- <ng-template #noServer>  <p>No server was created! </p></ng-template> -->
+<!-- Local refernce using #, and ng-template is used to mark places in the DOM -->
+
+
+<!-- <p [innerText]="allowNewServer"></p>  -->   <!-- property binding -->
+<!-- String interpolation doesn't work inside property binding -->
+<hr>
+
+
+<app-server *ngFor = "let server of servers"></app-server> <!-- Nesting server component-->
+<!-- ngFor is a structural directive -->
+
+
+
+<!-- Assignemnet 3  -->
+<button class ="btn btn-primary" (click)="onToggle()">Display Details: {{dontDisplay}}</button>
+<p *ngIf ="dontDisplay; else displayDetails"></p>
+<ng-template #displayDetails>
+<p> This is 3rd assignment</p>
+</ng-template>
+
+<div>
+<p *ngFor = "let stamp of display_button"
+[ngStyle]="{backgroundColor: display_button.indexOf(stamp) > 4 ? 'blue' : 'white'}"
+[ngClass]="{displayText: display_button.indexOf(stamp) > 4}"
+>display is toggled at {{stamp}}</p>
+</div>
